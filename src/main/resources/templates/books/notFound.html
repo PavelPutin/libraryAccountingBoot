@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book not found</title>
+</head>
+<body>
+  <h1>404</h1>
+  <p>
+    Книга с идентификатором <span th:text="${id}"/> не найдена.
+  </p>
+
+  <p>
+    <a href="/books">К списку книг</a>
+  </p>
+</body>
+</html>

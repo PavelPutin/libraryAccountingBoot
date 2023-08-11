@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+
+    <h1>Список книг</h1>
+    <p>
+        <a href="/people">К списку людей</a>
+    </p>
+
+    <p>
+        <a href="/books/search">На страницу поиска книг</a>
+    </p>
+
+    <div th:if="${param.sort_by_year == null}">
+        <a th:href="${enableSortByYearPath}">Включить сортировку по году</a>
+    </div>
+
+    <div th:if="${param.sort_by_year != null && param.sort_by_year}">
+        <a th:href="${disableSortByYearPath}">Отключить сортировку по году</a>
+    </div>
+
+    <p th:if="${param.page == null || param.books_per_page == null}">
+        <a th:href="${enablePagingPath}">Включить постраничный просмотр</a>
+    </p>
+    <div th:if="${param.page != null && param.books_per_page != null}">
+        <a th:href="${disablePagingPath}">Отключить постраничный просмотр</a>
+
+        <div>
+            <a th:if="${currentPage > 0}" th:href="${previousPagePath}">&lt;</a>
+            <span th:if="${currentPage <= 0}">-</span>
+            <span th:text="${currentPage + 1}"/>/<span th:text="${pagesAmount}"/>
+            <a th:if="${currentPage < pagesAmount - 1}" th:href="${nextPagePath}">&gt;</a>
+            <span th:if="${currentPage >= pagesAmount - 1}">-</span>
+        </div>
+    </div>
+  <ul>
+    <li th:each="book : ${books}">
+        <a th:href="@{/books/{id}(id=${book.getId()})}">
+            <span th:text="${book.getName()}"/>, <span th:text="${book.getAuthor()}"/>, <span th:text="${book.getPublishYear()}"/>
+        </a>
+    </li>
+  </ul>
+
+  <br>
+  <hr>
+
+  <a th:href="@{/books/new}">Добавить книгу</a>
+</body>
+</html>

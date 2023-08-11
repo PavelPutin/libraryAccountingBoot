@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить книгу</title>
+</head>
+<body>
+    <form th:action="@{/books}" method="post" th:object="${book}">
+        <div>
+            <label for="name">Введите название книги: </label>
+            <input type="text" th:field="*{name}" id="name">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+
+        <div>
+            <label for="author">Введите автора книги: </label>
+            <input type="text" th:field="*{author}" id="author">
+            <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+        </div>
+
+        <div>
+            <label for="publishYear">Введите год: </label>
+            <input type="text" th:field="*{publishYear}" id="publishYear">
+            <span th:if="${#fields.hasErrors('publishYear')}" th:errors="*{publishYear}"></span>
+        </div>
+        
+        <div>
+            <input type="submit" value="Создать!">
+        </div>
+    </form>
+    <a href="/books">К списку книг</a>
+</body>
+</html>

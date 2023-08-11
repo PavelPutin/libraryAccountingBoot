@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование книги</title>
+</head>
+<body>
+  <form th:method="PATCH" th:action="@{/books/{id}(id=${editingBook.getId()})}" th:object="${editingBook}">
+    <div>
+      <label for="name">Введите название книги: </label>
+      <input type="text" th:field="*{name}" id="name">
+      <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+
+    <div>
+      <label for="author">Введите автора книги: </label>
+      <input type="text" th:field="*{author}" id="author">
+      <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+    </div>
+
+    <div>
+      <label for="publishYear">Введите год: </label>
+      <input type="text" th:field="*{publishYear}" id="publishYear">
+      <span th:if="${#fields.hasErrors('publishYear')}" th:errors="*{publishYear}"></span>
+    </div>
+
+    <div>
+      <input type="submit" value="Редактировать!">
+    </div>
+  </form>
+  <a th:href="@{/books/{id}(id=${editingBook.getId()})}">Отменить изменения и вернуться на страницу книги</a>
+</body>
+</html>
